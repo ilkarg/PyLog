@@ -1,0 +1,46 @@
+from datetime import datetime
+import os
+
+class PyLog:
+    def __init__(self):
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+
+    def get_log_time(self):
+        log_time = datetime.now()
+        hour, minute, second = log_time.hour, log_time.minute, log_time.second if log_time.second > 10 else f'0{log_time.second}'
+        log_time_formatted = f'[{hour}:{minute}:{second}]'
+        return log_time, log_time_formatted
+
+    def log_file_exists(self, path):
+        return os.path.exists(path)
+
+    def format_log_file_name(self, log_time):
+        return f'{log_time.day}_{log_time.month}_{log_time.year}.log'
+
+    def format_log_value(self, log_time, value):
+        if not type(value) == list and not type(value) == dict:
+            return f'{log_time} {value}\n'
+
+        return f'{log_time} {value}'
+
+    def write_to_log_file(self, path, value, flag, value_type):
+        file = open(path, flag)
+        if not value_type == list and not value_type == dict:
+            file.write(value)
+        else:
+            file.write(value)
+            file.write('\n')
+        file.close()
+
+    def log(self, value):
+        log_time = self.get_log_time()
+        filename = self.format_log_file_name(log_time[0])
+        path = f'logs/{filename}'
+
+        if not self.log_file_exists(path):
+            self.write_to_log_file(path, '', 'x', str)
+
+        self.write_to_log_file(path, self.format_log_value(log_time[1], value), 'a', type(value))
+        return
+
