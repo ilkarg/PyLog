@@ -9,18 +9,18 @@ class PyLog:
     def get_time(self):
         log_time = datetime.now()
         log_time_dict = {
-            'hour': log_time.hour if log_time.hour > 10 else f'0{log_time.hour}',
-            'minute': log_time.minute if log_time.minute > 10 else f'0{log_time.minute}',
-            'second': log_time.second if log_time.second > 10 else f'0{log_time.second}'
+            'hour': log_time.hour if log_time.hour >= 10 else f'0{log_time.hour}',
+            'minute': log_time.minute if log_time.minute >= 10 else f'0{log_time.minute}',
+            'second': log_time.second if log_time.second >= 10 else f'0{log_time.second}'
         }
         return f'[{log_time_dict["hour"]}:{log_time_dict["minute"]}:{log_time_dict["second"]}]'
 
     def get_log_time(self):
         log_time = datetime.now()
         log_time_dict = {
-            'hour': log_time.hour if log_time.hour > 10 else f'0{log_time.hour}',
-            'minute': log_time.minute if log_time.minute > 10 else f'0{log_time.minute}',
-            'second': log_time.second if log_time.second > 10 else f'0{log_time.second}'
+            'hour': log_time.hour if log_time.hour >= 10 else f'0{log_time.hour}',
+            'minute': log_time.minute if log_time.minute >= 10 else f'0{log_time.minute}',
+            'second': log_time.second if log_time.second >= 10 else f'0{log_time.second}'
         }
         return log_time, f'[{log_time_dict["hour"]}:{log_time_dict["minute"]}:{log_time_dict["second"]}]'
 
