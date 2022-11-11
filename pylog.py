@@ -2,7 +2,8 @@ from datetime import datetime
 import os
 
 class PyLog:
-    def __init__(self):
+    def __init__(self, delimeter=''):
+        self.delimeter = delimeter
         if not os.path.exists('logs'):
             os.mkdir('logs')
 
@@ -36,13 +37,18 @@ class PyLog:
 
         return f'{log_time} {value}'
 
+    def set_delimeter(self, delimeter):
+        self.delimeter = delimeter
+
     def write_to_log_file(self, path, value, flag, value_type):
         file = open(path, flag)
         if not value_type == list and not value_type == dict:
             file.write(value)
+            file.write(self.delimeter)
         else:
             file.write(value)
             file.write('\n')
+            file.write(self.delimeter)
         file.close()
 
     def log(self, value):
