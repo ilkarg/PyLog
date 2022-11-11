@@ -5,10 +5,19 @@ class PyLog:
     def __init__(self):
         if not os.path.exists('logs'):
             os.mkdir('logs')
+            
+    def get_time(self):
+        log_time = datetime.now()
+        hour = log_time.hour if log_time.hour > 10 else f'0{log_time.hour}'
+        minute = log_time.minute if log_time.minute > 10 else f'0{log_time.minute}'
+        second = log_time.second if log_time.second > 10 else f'0{log_time.second}'
+        return f'[{hour}:{minute}:{second}]'
 
     def get_log_time(self):
-        log_time = datetime.now()
-        hour, minute, second = log_time.hour, log_time.minute, log_time.second if log_time.second > 10 else f'0{log_time.second}'
+        log_time = datetime.now(
+        hour = log_time.hour if log_time.hour > 10 else f'0{log_time.hour}'
+        minute = log_time.minute if log_time.minute > 10 else f'0{log_time.minute}'
+        second = log_time.second if log_time.second > 10 else f'0{log_time.second}'
         log_time_formatted = f'[{hour}:{minute}:{second}]'
         return log_time, log_time_formatted
 
