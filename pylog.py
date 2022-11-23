@@ -32,7 +32,7 @@ class PyLog:
         return f'{type.upper()} - {log_time.day}_{log_time.month}_{log_time.year}.log'
 
     def format_log_value(self, log_time, value):
-        if not type(value) == list and not type(value) == dict:
+        if not type(value) == list and not type(value) == dict and not type(value).__name__ == 'DataFrame':
             return f'{log_time} {value}\n'
 
         return f'{log_time} {value}'
@@ -42,7 +42,7 @@ class PyLog:
 
     def write_to_log_file(self, path, value, flag, value_type):
         file = open(path, flag)
-        if not value_type == list and not value_type == dict:
+        if not value_type == list and not value_type == dict and not type(value).__name__ == 'DataFrame':
             file.write(str(value))
             file.write(self.delimeter)
         else:
